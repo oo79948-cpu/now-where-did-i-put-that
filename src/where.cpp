@@ -15,23 +15,22 @@ int findIndexImpl(string input, string find, bool caseSensitive = true, int star
 
    int foundIndex = -1;
    int findLength = find.length();
+   int inputLength = input.length();
+   int inputLastIndex = input.length() - 1;
    if ( findLength == 0 ) { return foundIndex; }
+   if (start < 0 || start > inputLastIndex) { return foundIndex; }
 
-   if (start < 0) { return foundIndex; }
-
-   int inputLength = input.length() - start;
    for (int i=start; i<inputLength; i++) {
-      if (findLength > inputLength - i) { return foundIndex; }
-      if (input[i] == find[0] || find[0] == '?') {
-
+      if (input[i] == find[0]) {
          foundIndex = i;
          for (int j=0; j<findLength; j++) {
-            if (input[i+j] != find[j] && find[j] != '?') {
+            int inputAtIndex = i + j;
+            if ( inputAtIndex > inputLastIndex ||  input[inputAtIndex] != find[j]) {
                foundIndex = -1;
                break;
             }
          }
-         return foundIndex;
+         if (foundIndex >=0 ) { return foundIndex; }
       }
    }
 

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void toLowerCase(string input);
+void toLowerCase(string &input);
 
 int findIndexImpl(string input, string find, bool caseSensitive = true, int start = 0);
 
